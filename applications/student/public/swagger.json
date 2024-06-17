@@ -1,0 +1,142 @@
+{
+	"openapi": "3.0.0",
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"IStudent": {
+				"properties": {
+					"school_name": {
+						"type": "string"
+					},
+					"education": {
+						"type": "string"
+					},
+					"grade": {
+						"type": "number",
+						"format": "double"
+					},
+					"student_card": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"school_name",
+					"education",
+					"grade",
+					"student_card"
+				],
+				"type": "object",
+				"additionalProperties": false
+			}
+		},
+		"securitySchemes": {}
+	},
+	"info": {
+		"title": "student-service",
+		"version": "1.0.0",
+		"description": "Learnwithkru api project",
+		"license": {
+			"name": "ISC"
+		},
+		"contact": {
+			"name": "Smoeury Songvat"
+		}
+	},
+	"paths": {
+		"/v1/students/become-student": {
+			"post": {
+				"operationId": "Signup",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"token": {
+											"type": "string"
+										},
+										"data": {
+											"additionalProperties": false,
+											"type": "object"
+										},
+										"message": {
+											"type": "string"
+										}
+									},
+									"required": [
+										"token",
+										"data",
+										"message"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IStudent"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/v1/students/login/{userId}": {
+			"get": {
+				"operationId": "Login",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"token": {
+											"type": "string"
+										},
+										"message": {
+											"type": "string"
+										}
+									},
+									"required": [
+										"token",
+										"message"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "userId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "/"
+		}
+	]
+}

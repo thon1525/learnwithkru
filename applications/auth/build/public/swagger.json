@@ -1,0 +1,538 @@
+{
+	"openapi": "3.0.0",
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"UserSignup": {
+				"properties": {
+					"firstname": {
+						"type": "string"
+					},
+					"lastname": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					},
+					"password": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"firstname",
+					"lastname"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IUser": {
+				"properties": {
+					"authId": {
+						"type": "string"
+					},
+					"firstname": {
+						"type": "string"
+					},
+					"lastname": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					},
+					"picture": {
+						"type": "string",
+						"nullable": true
+					}
+				},
+				"required": [
+					"firstname",
+					"lastname",
+					"picture"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Login": {
+				"properties": {
+					"email": {
+						"type": "string"
+					},
+					"password": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"email",
+					"password"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ResetPassword": {
+				"properties": {
+					"newPassword": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"newPassword"
+				],
+				"type": "object",
+				"additionalProperties": false
+			}
+		},
+		"securitySchemes": {}
+	},
+	"info": {
+		"title": "authentication-service",
+		"version": "1.0.0",
+		"description": "authentication service",
+		"license": {
+			"name": "ISC"
+		},
+		"contact": {
+			"name": "Smoeury Songvat"
+		}
+	},
+	"paths": {
+		"/v1/auth/signup": {
+			"post": {
+				"operationId": "Singup",
+				"responses": {
+					"201": {
+						"description": "Created",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"message": {
+											"type": "string"
+										}
+									},
+									"required": [
+										"message"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UserSignup"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/v1/auth/verify": {
+			"get": {
+				"operationId": "VerifySignupEmail",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"token": {
+											"type": "string"
+										},
+										"data": {
+											"$ref": "#/components/schemas/IUser"
+										},
+										"message": {
+											"type": "string"
+										}
+									},
+									"required": [
+										"token",
+										"data",
+										"message"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "token",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/v1/auth/password-reset/verify": {
+			"get": {
+				"operationId": "VerifyResetPasswordEmail",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"message": {
+											"type": "string"
+										}
+									},
+									"required": [
+										"message"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "token",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/v1/auth/login": {
+			"post": {
+				"operationId": "Login",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"token": {
+											"type": "string"
+										},
+										"data": {
+											"$ref": "#/components/schemas/IUser"
+										},
+										"message": {
+											"type": "string"
+										}
+									},
+									"required": [
+										"token",
+										"data",
+										"message"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Login"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/v1/auth/google": {
+			"get": {
+				"operationId": "GoogleOAuth",
+				"responses": {
+					"302": {
+						"description": "FOUND",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"redirectUrl": {
+											"type": "string"
+										}
+									},
+									"required": [
+										"redirectUrl"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/v1/auth/facebook": {
+			"get": {
+				"operationId": "FacebookOAuth",
+				"responses": {
+					"302": {
+						"description": "FOUND",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"redirectUrl": {
+											"type": "string"
+										}
+									},
+									"required": [
+										"redirectUrl"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/v1/auth/google/callback": {
+			"get": {
+				"operationId": "GoogleOAuth",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"token": {
+											"type": "string"
+										},
+										"data": {
+											"$ref": "#/components/schemas/IUser"
+										},
+										"message": {
+											"type": "string"
+										}
+									},
+									"required": [
+										"token",
+										"data",
+										"message"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "code",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/v1/auth/facebook/callback": {
+			"get": {
+				"operationId": "FacebookOAuthCallBack",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"token": {
+											"type": "string"
+										},
+										"data": {
+											"$ref": "#/components/schemas/IUser"
+										},
+										"message": {
+											"type": "string"
+										}
+									},
+									"required": [
+										"token",
+										"data",
+										"message"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "code",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/v1/auth/password-reset/request": {
+			"post": {
+				"operationId": "RequestResetPassword",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"message": {
+											"type": "string"
+										}
+									},
+									"required": [
+										"message"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"email": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"email"
+								],
+								"type": "object"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/v1/auth/reset-password": {
+			"post": {
+				"operationId": "ConfirmResetPassword",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"message": {
+											"type": "string"
+										}
+									},
+									"required": [
+										"message"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/ResetPassword"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/v1/auth/logout": {
+			"get": {
+				"operationId": "Logout",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"isLogout": {
+											"type": "boolean",
+											"enum": [
+												true
+											],
+											"nullable": false
+										},
+										"message": {
+											"type": "string"
+										}
+									},
+									"required": [
+										"isLogout",
+										"message"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "header",
+						"name": "authorization",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "/"
+		}
+	]
+}

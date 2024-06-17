@@ -1,0 +1,11 @@
+node_modules/
+
+
+LearLearnwithkru.pem
+
+# configs/.env/
+# configs/.env.prod/
+
+
+# public_key.pem
+

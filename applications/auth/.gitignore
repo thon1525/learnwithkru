@@ -1,0 +1,8 @@
+node_modules/
+
+configs/.env
+build/configs/.env
+
+# Uncomment the following lines if you want to ignore these files too
+# configs/.env.prod
+# private_key.pem
