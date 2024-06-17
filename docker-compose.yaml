@@ -1,11 +1,11 @@
 version: "3.8"
 services:
   rabbitmq:
-    container_name: rabbitmq_container
+    container_name: rabbitmq_container_api
     image: rabbitmq:3.13.2-management-alpine
     restart: always
     environment:
-      RABBITMQ_DEFAULT_USER: learnwithkru
+      RABBITMQ_DEFAULT_USER: learnwithkru_api
       RABBITMQ_DEFAULT_PASS: kruIimage
     ports:
       - "5672:5672"
@@ -17,7 +17,7 @@ services:
       retries: 5
 
   gateway:
-    container_name: gateway
+    container_name: gateway_api
     build:
       context: ./applications/api-gateway
       dockerfile: Dockerfile.dev
@@ -35,7 +35,7 @@ services:
       CLIENT_URL: http://localhost:8000
 
   notification:
-    container_name: notification_container
+    container_name: notification_container_api
     build:
       context: ./applications/notification
       dockerfile: Dockerfile.dev
@@ -52,7 +52,7 @@ services:
         condition: service_healthy
 
   auth:
-    container_name: auth
+    container_name: auth_api
     build:
       context: ./applications/auth
       dockerfile: Dockerfile.dev
@@ -73,7 +73,7 @@ services:
         condition: service_healthy
 
   user:
-    container_name: user
+    container_name: user_api
     build:
       context: ./applications/user
       dockerfile: Dockerfile.dev
@@ -88,7 +88,7 @@ services:
       AUTH_SERVICE_GET: http://auth:3001
 
   student:
-    container_name: student
+    container_name: student_api_api
     build:
       context: ./applications/student
       dockerfile: Dockerfile.dev
@@ -103,7 +103,7 @@ services:
       USER_SERVICE: http://user:3004
 
   teacher:
-    container_name: teacher
+    container_name: teacher_api
     build:
       context: ./applications/teacher
       dockerfile: Dockerfile.dev
