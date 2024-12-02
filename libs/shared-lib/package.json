@@ -1,0 +1,12 @@
+{
+  "name": "shared-lib",
+  "version": "1.0.0",
+  "description": "share library",
+  "main": "index.js",
+  "author": "Smoeury Songvat",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "shared-lib": "file:"
+  }
+}

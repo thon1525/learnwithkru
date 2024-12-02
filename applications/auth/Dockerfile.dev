@@ -1,0 +1,19 @@
+FROM node:21-alpine3.18
+
+WORKDIR /app
+
+# Copy package.json, tsconfig.json, source code
+COPY package*.json ./
+COPY tsconfig.json ./
+COPY src ./src
+COPY private_key.pem ./
+COPY tsoa.json ./
+COPY public ./public
+RUN ls -a
+
+# Install dependencies and nodemon
+RUN npm install && npm install -g nodemon ts-node
+
+EXPOSE 3001
+
+CMD ["npm", "run", "start:dev"]

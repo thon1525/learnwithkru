@@ -1,0 +1,801 @@
+{
+	"openapi": "3.0.0",
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"IClassRespone": {
+				"properties": {
+					"class_name": {
+						"type": "string"
+					},
+					"subject": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					},
+					"_id": {
+						"type": "string"
+					},
+					"teacherId": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"class_name",
+					"subject",
+					"email",
+					"_id",
+					"teacherId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IClass": {
+				"properties": {
+					"class_name": {
+						"type": "string"
+					},
+					"subject": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"class_name",
+					"subject",
+					"email"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ITimeSlot": {
+				"properties": {
+					"start": {
+						"type": "string"
+					},
+					"end": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"start",
+					"end"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IAvailableDay": {
+				"properties": {
+					"day": {
+						"type": "string"
+					},
+					"time": {
+						"items": {
+							"$ref": "#/components/schemas/ITimeSlot"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"day",
+					"time"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ITotalRating": {
+				"properties": {
+					"r1": {
+						"type": "number",
+						"format": "double"
+					},
+					"r2": {
+						"type": "number",
+						"format": "double"
+					},
+					"r3": {
+						"type": "number",
+						"format": "double"
+					},
+					"r4": {
+						"type": "number",
+						"format": "double"
+					},
+					"r5": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ITeacher": {
+				"properties": {
+					"first_name": {
+						"type": "string"
+					},
+					"last_name": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					},
+					"picture": {
+						"type": "string"
+					},
+					"phone_number": {
+						"type": "string"
+					},
+					"subject": {
+						"type": "string"
+					},
+					"province": {
+						"type": "string"
+					},
+					"university": {
+						"type": "string"
+					},
+					"year_experience": {
+						"type": "number",
+						"format": "double"
+					},
+					"type_degree": {
+						"type": "string"
+					},
+					"certificate": {
+						"type": "string"
+					},
+					"bio": {
+						"type": "string"
+					},
+					"motivation": {
+						"type": "string"
+					},
+					"date_available": {
+						"items": {
+							"$ref": "#/components/schemas/IAvailableDay"
+						},
+						"type": "array"
+					},
+					"price": {
+						"type": "number",
+						"format": "double"
+					},
+					"video": {
+						"type": "string"
+					},
+					"teaching_experience": {
+						"type": "string"
+					},
+					"total_rating": {
+						"$ref": "#/components/schemas/ITotalRating"
+					},
+					"number_of_ratings": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"first_name",
+					"last_name",
+					"email",
+					"picture",
+					"phone_number",
+					"subject",
+					"province",
+					"bio",
+					"motivation",
+					"date_available",
+					"price",
+					"video",
+					"teaching_experience"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IQueries": {
+				"properties": {
+					"pageSize": {
+						"type": "number",
+						"format": "double"
+					},
+					"pageNumber": {
+						"type": "number",
+						"format": "double"
+					},
+					"name": {
+						"type": "string"
+					},
+					"subject": {
+						"type": "string"
+					},
+					"time_available": {
+						"type": "string"
+					},
+					"province": {
+						"type": "string"
+					},
+					"min_p": {
+						"type": "number",
+						"format": "double",
+						"nullable": true
+					},
+					"max_p": {
+						"type": "number",
+						"format": "double",
+						"nullable": true
+					}
+				},
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ITeacherUpdate": {
+				"properties": {
+					"first_name": {
+						"type": "string"
+					},
+					"last_name": {
+						"type": "string"
+					},
+					"picture": {
+						"type": "string"
+					},
+					"phone_number": {
+						"type": "string"
+					},
+					"subject": {
+						"type": "string"
+					},
+					"province": {
+						"type": "string"
+					},
+					"university": {
+						"type": "string"
+					},
+					"year_experience": {
+						"type": "number",
+						"format": "double"
+					},
+					"type_degree": {
+						"type": "string"
+					},
+					"bio": {
+						"type": "string"
+					},
+					"motivation": {
+						"type": "string"
+					},
+					"date_available": {
+						"items": {
+							"$ref": "#/components/schemas/IAvailableDay"
+						},
+						"type": "array"
+					},
+					"price": {
+						"type": "number",
+						"format": "double"
+					},
+					"certificate": {
+						"type": "string"
+					},
+					"video": {
+						"type": "string"
+					},
+					"teaching_experience": {
+						"type": "string"
+					},
+					"total_rating": {
+						"$ref": "#/components/schemas/ITotalRating"
+					},
+					"number_of_rating": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"type": "object",
+				"additionalProperties": false
+			}
+		},
+		"securitySchemes": {}
+	},
+	"info": {
+		"title": "teacher-service",
+		"version": "1.0.0",
+		"description": "Learnwithkru api project",
+		"license": {
+			"name": "ISC"
+		},
+		"contact": {
+			"name": "Smoeury Songvat"
+		}
+	},
+	"paths": {
+		"/v1/teachers/class": {
+			"post": {
+				"operationId": "CreateClass",
+				"responses": {
+					"201": {
+						"description": "Created",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"data": {
+											"$ref": "#/components/schemas/IClassRespone"
+										},
+										"message": {
+											"type": "string"
+										}
+									},
+									"required": [
+										"data",
+										"message"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IClass"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/v1/teachers": {
+			"get": {
+				"operationId": "TeacherList",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"data": {
+											"items": {
+												"$ref": "#/components/schemas/ITeacher"
+											},
+											"type": "array"
+										},
+										"detail": {
+											"properties": {
+												"currentPage": {
+													"type": "number",
+													"format": "double"
+												},
+												"totalTeachers": {
+													"type": "number",
+													"format": "double"
+												},
+												"totalPages": {
+													"type": "number",
+													"format": "double"
+												}
+											},
+											"required": [
+												"currentPage",
+												"totalTeachers",
+												"totalPages"
+											],
+											"type": "object"
+										},
+										"message": {
+											"type": "string"
+										}
+									},
+									"required": [
+										"data",
+										"detail",
+										"message"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "pageSize",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "pageNumber",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "name",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "subject",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "time_available",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "province",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "min_p",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "max_p",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			}
+		},
+		"/v1/teachers/become-teacher": {
+			"post": {
+				"operationId": "TeacherSingup",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"token": {
+											"type": "string"
+										},
+										"data": {
+											"$ref": "#/components/schemas/ITeacher"
+										}
+									},
+									"required": [
+										"token",
+										"data"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/ITeacher"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/v1/teachers/{id}": {
+			"get": {
+				"operationId": "FindOneTeacher",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"data": {
+											"$ref": "#/components/schemas/ITeacher"
+										},
+										"message": {
+											"type": "string"
+										}
+									},
+									"required": [
+										"data",
+										"message"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/v1/teachers/login/{userId}": {
+			"get": {
+				"operationId": "Login",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"token": {
+											"type": "string"
+										},
+										"message": {
+											"type": "string"
+										}
+									},
+									"required": [
+										"token",
+										"message"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "userId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/v1/teachers/get/{id}": {
+			"get": {
+				"operationId": "GetTeacher",
+				"responses": {
+					"200": {
+						"description": "GET OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"data": {
+											"$ref": "#/components/schemas/ITeacher"
+										},
+										"message": {
+											"type": "string"
+										}
+									},
+									"required": [
+										"data",
+										"message"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/v1/teachers/teacher-profile": {
+			"get": {
+				"operationId": "GetProfileTeacher",
+				"responses": {
+					"200": {
+						"description": "GET OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"data": {
+											"$ref": "#/components/schemas/ITeacher"
+										},
+										"message": {
+											"type": "string"
+										}
+									},
+									"required": [
+										"data",
+										"message"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/v1/teachers/update": {
+			"put": {
+				"operationId": "UpdateTeacher",
+				"responses": {
+					"201": {
+						"description": "Updated",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"data": {
+											"$ref": "#/components/schemas/ITeacher"
+										},
+										"message": {
+											"type": "string"
+										}
+									},
+									"required": [
+										"data",
+										"message"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/ITeacherUpdate"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/v1/teachers/rate/{teacherId}": {
+			"post": {
+				"operationId": "RateTeacher",
+				"responses": {
+					"201": {
+						"description": "Create Rate",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"data": {
+											"properties": {
+												"feedback": {
+													"type": "string"
+												},
+												"rating": {
+													"type": "number",
+													"format": "double"
+												}
+											},
+											"required": [
+												"feedback",
+												"rating"
+											],
+											"type": "object"
+										},
+										"message": {
+											"type": "string"
+										}
+									},
+									"required": [
+										"data",
+										"message"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "teacherId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"feedback": {
+										"type": "string"
+									},
+									"rating": {
+										"type": "number",
+										"format": "double"
+									}
+								},
+								"required": [
+									"rating"
+								],
+								"type": "object"
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "/"
+		}
+	]
+}
